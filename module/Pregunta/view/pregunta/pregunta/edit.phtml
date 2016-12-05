@@ -1,0 +1,42 @@
+<?php
+
+$title = 'Editar pregunta';
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+$pregunta = $form->get('texto');
+$pregunta->setAttribute('class', 'form-control');
+$pregunta->setAttribute('placeholder', 'Texto de la pregunta');
+
+
+$submit = $form->get('submit');
+//$id_examen=$form->getValue('id_examen');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('pregunta', [
+    'action' => 'edit',
+    'id_pregunta'     => $id_pregunta
+]));
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+?>
+<div class="form-group">
+    <?= $this->formLabel($pregunta) ?>
+    <?= $this->formElement($pregunta) ?>
+    <?= $this->formElementErrors()->render($pregunta, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id_pregunta'));
+echo $this->formHidden($form->get('id_examen'));
+echo $this->form()->closeTag();
+
+?>

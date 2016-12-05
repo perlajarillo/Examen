@@ -1,0 +1,33 @@
+<?php
+
+$title = 'Preguntas para el examen';
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+
+    <a href="<?= $this->url('pregunta', ['action' => 'add', 'id_pregunta'=> $id_examen]) ?>">Agregar pregunta</a>
+</p>
+<table class="table">
+    <tr>
+        <th>No.</th>
+        <th>Pregunta</th>
+        <th>Examen relacionado</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($preguntas as $pregunta) { ?>
+        <tr>
+            <td><?= $this->escapeHtml($pregunta->id_pregunta) ?></td>
+            <td><?= $this->escapeHtml($pregunta->texto) ?></td>
+            <td><?= $this->escapeHtml($pregunta->id_examen) ?></td>
+            
+            <td>
+                <a href="<?= $this->url('pregunta', ['action' => 'edit', 'id_pregunta' => $pregunta->id_pregunta]) ?>">Editar</a>
+                <a href="<?= $this->url('pregunta', ['action' => 'delete', 'id_pregunta' => $pregunta->id_pregunta]) ?>">Eliminar</a>
+                <a href="<?= $this->url('respuesta', ['action' => 'index', 'id_respuesta' => $pregunta->id_pregunta]) ?>">Agregar respuestas</a>
+                
+            </td>
+        </tr>
+    <?php } ?>
+</table>
