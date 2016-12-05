@@ -1,0 +1,59 @@
+<?php
+
+$title = 'Contestar examen';
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<form name="frmExamenAlumno" id="frmExamenAlumno" action="<?= $this->url('alumno', ['action' => 'grade'])?>">
+
+   <?php 
+    $anterior="";
+    $n=0;
+
+
+   foreach ($examenesC as $examenC) { ?>
+    
+           
+            <p> <?= $this->escapeHtml($examenC->textoP) ?></p>
+           
+            <?php 
+                $n=$n+1;
+                $pregunta=$examenC->textoP;
+                if ($pregunta==$anterior){
+            ?>
+
+            <option value="<?= $this->escapeHtml($examenC->correcta) ?>"> <?= $this->escapeHtml($examenC->textoR) ?></option>
+            <?php 
+                $anterior=$examenC->textoP;
+                $n=$n-1;
+                }
+                else
+                {
+                if($anterior!="")
+                { ?>
+                     </select>
+                     <br>
+                    <p> <?= $this->escapeHtml($examenC->textoP) ?></p>
+                <?php } ?>
+       
+
+            
+            <select name="<?php  echo $n; ?>">
+            <option value="<?= $this->escapeHtml($examenC->correcta) ?>"> <?= $this->escapeHtml($examenC->textoR) ?></option>
+
+            
+            <?php $anterior=$examenC->textoP; 
+            } ?>
+            <br>
+
+
+    <?php }
+    
+     ?>
+     <input type="hidden" value="<?php  echo $n; ?>" name="n"/>
+     <br>
+     <input type="submit">
+</form>
+
