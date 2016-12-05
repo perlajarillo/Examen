@@ -1,0 +1,21 @@
+<?php
+
+$title = 'Borrar examen';
+$url   = $this->url('examen', ['action' => 'delete', 'id' => $id]);
+
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    ¿Está seguro de borrar este examen?
+    "<?= $this->escapeHtml($examen->materia) ?>" unidad: 
+    "<?= $this->escapeHtml($examen->unidad) ?>"?
+</p>
+<form action="<?= $url ?>" method="post">
+    <div class="form-group">
+        <input type="hidden" name="id" value="<?= (int) $examen->id ?>" />
+        <input type="submit" class="btn btn-danger" name="del" value="Si" />
+        <input type="submit" class="btn btn-success" name="del" value="No" />
+    </div>
+</form>

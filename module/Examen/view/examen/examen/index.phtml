@@ -1,0 +1,30 @@
+<?php
+
+$title = 'Examenes DevBlocks';
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('examen', ['action' => 'add']) ?>">Agregar un nuevo examen</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Materia</th>
+        <th>Unidad</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($examenes as $examen) { ?>
+        <tr>
+            <td><?= $this->escapeHtml($examen->id) ?></td>
+            <td><?= $this->escapeHtml($examen->materia) ?></td>
+            <td><?= $this->escapeHtml($examen->unidad) ?></td>
+            <td>
+                <a href="<?= $this->url('examen', ['action' => 'edit', 'id' => $examen->id]) ?>">Editar</a>
+                <a href="<?= $this->url('examen', ['action' => 'delete', 'id' => $examen->id]) ?>">Eliminar</a>
+                <a href="<?= $this->url('pregunta', ['action' => 'index', 'id_pregunta' => $examen->id]) ?>">Agregar preguntas</a>
+            </td>
+        </tr>
+    <?php } ?>
+</table>

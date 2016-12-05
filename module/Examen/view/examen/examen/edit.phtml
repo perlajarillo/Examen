@@ -1,0 +1,47 @@
+<?php
+
+$title = 'Editar examen';
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+$examen = $form->get('materia');
+$examen->setAttribute('class', 'form-control');
+$examen->setAttribute('placeholder', 'Materia');
+
+$unidad = $form->get('unidad');
+$unidad->setAttribute('class', 'form-control');
+$unidad->setAttribute('placeholder', 'Unidad');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('examen', [
+    'action' => 'edit',
+    'id'     => $id,
+]));
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+?>
+<div class="form-group">
+    <?= $this->formLabel($examen) ?>
+    <?= $this->formElement($examen) ?>
+    <?= $this->formElementErrors()->render($examen, ['class' => 'help-block']) ?>
+</div>
+<div class="form-group">
+    <?= $this->formLabel($unidad) ?>
+    <?= $this->formElement($unidad) ?>
+    <?= $this->formElementErrors()->render($unidad, ['class' => 'help-block']) ?>
+</div>
+<?php
+
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+
+?>
