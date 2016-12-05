@@ -1,0 +1,53 @@
+<?php
+$title = 'Agregar una respuesta';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+$respuesta = $form->get('texto');
+$respuesta->setAttribute('class', 'form-control');
+$respuesta->setAttribute('placeholder', 'Texto de la respuesta');
+
+$id_pregunta = $form->get('id_pregunta');
+$id_pregunta->setAttribute('class', 'form-control');
+$id_pregunta->setAttribute('placeholder', 'Número de pregunta');
+
+$correcta = $form->get('correcta');
+$correcta->setAttribute('class', 'form-control');
+//$correcta->setAttribute('placeholder', 'Texto de la respuesta');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+//$form->setAttribute('action', $this->url('respuesta', ['action' => 'add', 'id_pregunta']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?>
+<div class="form-group">
+    <?= $this->formLabel($respuesta) ?>
+    <?= $this->formElement($respuesta) ?>
+    <?= $this->formElementErrors()->render($respuesta, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($id_pregunta) ?>
+    <?= $this->formElement($id_pregunta) ?>
+    <?= $this->formElementErrors()->render($id_pregunta, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($correcta) ?>
+    <?= $this->formElement($correcta) ?>
+    <?= $this->formElementErrors()->render($correcta, ['class' => 'help-block']) ?>
+</div>
+
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id_respuesta'));
+echo $this->form()->closeTag();

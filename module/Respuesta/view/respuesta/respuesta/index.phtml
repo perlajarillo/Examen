@@ -1,0 +1,36 @@
+<?php
+//$id_pregunta = $this->returnPregunta();
+$title = 'Respuestas de la pregunta';
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('respuesta', ['action' => 'add', 'id_respuesta'=> $id_pregunta]) ?>">Agregar Respuesta para la pregunta <?php echo "#".$this->idp; ?></a>
+</p>
+<table class="table">
+    <tr>
+        <th>No.</th>
+        <th>Respuesta</th>
+        <th>Pregunta relacionada</th>
+        <th>Marcada como correcta</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php 
+    
+    
+    foreach ($respuestas as $respuesta) { ?>
+        <tr>
+            <td><?= $this->escapeHtml($respuesta->id_respuesta) ?></td>
+            <td><?= $this->escapeHtml($respuesta->texto) ?></td>
+            <td><?= $this->escapeHtml($respuesta->id_pregunta) ?></td>
+            <td><?= $this->escapeHtml($respuesta->correcta) ?></td>
+            
+            <td>
+                <a href="<?= $this->url('respuesta', ['action' => 'edit', 'id_respuesta' => $respuesta->id_respuesta]) ?>">Editar</a>
+                <a href="<?= $this->url('respuesta', ['action' => 'delete', 'id_respuesta' => $respuesta->id_respuesta]) ?>">Eliminar</a>
+                
+            </td>
+        </tr>
+    <?php } ?>
+</table>

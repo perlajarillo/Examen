@@ -1,0 +1,58 @@
+<?php
+
+$title = 'Editar respuesta';
+$this->headTitle($title);
+
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+$respuesta = $form->get('texto');
+$respuesta->setAttribute('class', 'form-control');
+$respuesta->setAttribute('placeholder', 'Texto de la respuesta');
+
+$id_pregunta = $form->get('id_pregunta');
+$id_pregunta->setAttribute('class', 'form-control');
+$id_pregunta->setAttribute('placeholder', 'Número de pregunta');
+
+$correcta = $form->get('correcta');
+$correcta->setAttribute('class', 'form-control');
+
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('respuesta', [
+    'action' => 'edit',
+    'id_respuesta'     => $id_respuesta,
+]));
+
+$form->prepare();
+
+echo $this->form()->openTag($form);
+
+?>
+<div class="form-group">
+    <?= $this->formLabel($respuesta) ?>
+    <?= $this->formElement($respuesta) ?>
+    <?= $this->formElementErrors()->render($respuesta, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($correcta) ?>
+    <?= $this->formElement($correcta) ?>
+    <?= $this->formElementErrors()->render($correcta, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($id_pregunta) ?>
+    <?= $this->formElement($id_pregunta) ?>
+    <?= $this->formElementErrors()->render($id_pregunta, ['class' => 'help-block']) ?>
+</div>
+<?php
+
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id_respuesta'));
+echo $this->form()->closeTag();
+
+?>
